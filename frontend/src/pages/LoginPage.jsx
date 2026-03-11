@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import AuthLayout from "../components/auth/AuthLayout.jsx";
 import SocialLogin from "../components/auth/SocialLogin";
 import axios from "axios"; // ✅ Yeh line add karna compulsory hai
+import toast from "react-hot-toast";
 
 const FormInput = ({ label, type, placeholder, value, onChange }) => {
   return (
@@ -48,10 +49,11 @@ const LoginPage = () => {
 
       if (response.data.token) {
         login(response.data);
-        navigate("/dashboard");
+        toast.success("Logged in successfully!");
+        navigate('/dashboard');
       }
     } catch (err) {
-      alert(err.response?.data?.message || "Invalid Credentials!");
+      toast.error(err.response?.data?.message || "Invalid Credentials!");
     }
   };
 
