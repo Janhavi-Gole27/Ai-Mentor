@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import { useTheme } from "../context/ThemeContext";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import i18n from "../i18n/index.js";
 
@@ -104,10 +105,11 @@ export default function Settings() {
       }, 500);
 
       setAvatarFile(null);
+      toast.success("Profile updated successfully!");
       setProfilePopup(true);
     } catch (error) {
       console.error("❌ Error updating profile:", error.response?.data || error);
-      alert("Failed to update profile.");
+      toast.error("Failed to update profile.");
     } finally {
       setLoading(false);
     }
@@ -161,9 +163,8 @@ export default function Settings() {
       />
 
       <div
-        className={`flex-1 flex flex-col overflow-hidden transition-all duration-300 mt-3 ${
-          sidebarCollapsed ? "lg:ml-20" : "lg:ml-80"
-        }`}
+        className={`flex-1 flex flex-col overflow-hidden transition-all duration-300 mt-3 ${sidebarCollapsed ? "lg:ml-20" : "lg:ml-80"
+          }`}
       >
         <div className="flex flex-1 mt-15">
           {/* Settings Sidebar */}
@@ -386,7 +387,7 @@ export default function Settings() {
                         setLoading(true);
                         try {
                           const token = localStorage.getItem("token");
-            
+
                           await axios.put(
                             "/api/users/settings",
                             {
@@ -396,11 +397,11 @@ export default function Settings() {
                           );
 
 
-                          alert(t("settings.notifications.updated"));
+                          toast.success("Notification settings updated successfully!");
                           setOriginalNotifications({ ...settingsData.notifications });
                         } catch (error) {
                           console.error("Error updating settings:", error);
-                          alert("Failed to update settings. Please try again.");
+                          toast.error("Failed to update settings. Please try again.");
                         } finally {
                           setLoading(false);
                         }
@@ -492,61 +493,61 @@ export default function Settings() {
                           <label className="absolute -top-2 left-4 bg-card px-2 text-[14px] text-muted font-medium font-[Inter]">
                             {t("settings.security.current_password")}
                           </label>
-                            <input
-                              type={showCurrentPassword ? "text" : "password"}
-                              value={passwordData.currentPassword}
-                              onChange={(e) =>
-                                setPasswordData((prev) => ({
-                                  ...prev,
-                                  currentPassword: e.target.value,
-                                }))
-                              }
-                              className="w-full h-[50px] px-4 pr-12 rounded-xl border border-border text-[16px] font-[Inter] focus:ring-2 focus:ring-primary focus:border-primary bg-input text-main"
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setShowCurrentPassword(!showCurrentPassword)
-                              }
-                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted hover:text-main"
-                            >
-                              {showCurrentPassword ? (
-                                <EyeOff className="w-5 h-5" />
-                              ) : (
-                                <Eye className="w-5 h-5" />
-                              )}
-                            </button>
+                          <input
+                            type={showCurrentPassword ? "text" : "password"}
+                            value={passwordData.currentPassword}
+                            onChange={(e) =>
+                              setPasswordData((prev) => ({
+                                ...prev,
+                                currentPassword: e.target.value,
+                              }))
+                            }
+                            className="w-full h-[50px] px-4 pr-12 rounded-xl border border-border text-[16px] font-[Inter] focus:ring-2 focus:ring-primary focus:border-primary bg-input text-main"
+                          />
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setShowCurrentPassword(!showCurrentPassword)
+                            }
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted hover:text-main"
+                          >
+                            {showCurrentPassword ? (
+                              <EyeOff className="w-5 h-5" />
+                            ) : (
+                              <Eye className="w-5 h-5" />
+                            )}
+                          </button>
                         </div>
 
                         <div className="relative">
                           <label className="absolute -top-2 left-4 bg-card px-2 text-[14px] text-muted font-medium font-[Inter]">
                             {t("settings.security.new_password")}
                           </label>
-                            <input
-                              type={showNewPassword ? "text" : "password"}
-                              value={passwordData.newPassword}
-                              onChange={(e) =>
-                                setPasswordData((prev) => ({
-                                  ...prev,
-                                  newPassword: e.target.value,
-                                }))
-                              }
-                              className="w-full h-[50px] px-4 pr-12 rounded-xl border border-border text-[16px] font-[Inter] focus:ring-2 focus:ring-primary focus:border-primary bg-input text-main"
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setShowNewPassword(!showNewPassword)
-                              }
-                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted hover:text-main"
-                            >
-                              {showNewPassword ? (
-                                <EyeOff className="w-5 h-5" />
-                              ) : (
-                                <Eye className="w-5 h-5" />
-                              )}
-                            </button>
-                          
+                          <input
+                            type={showNewPassword ? "text" : "password"}
+                            value={passwordData.newPassword}
+                            onChange={(e) =>
+                              setPasswordData((prev) => ({
+                                ...prev,
+                                newPassword: e.target.value,
+                              }))
+                            }
+                            className="w-full h-[50px] px-4 pr-12 rounded-xl border border-border text-[16px] font-[Inter] focus:ring-2 focus:ring-primary focus:border-primary bg-input text-main"
+                          />
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setShowNewPassword(!showNewPassword)
+                            }
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted hover:text-main"
+                          >
+                            {showNewPassword ? (
+                              <EyeOff className="w-5 h-5" />
+                            ) : (
+                              <Eye className="w-5 h-5" />
+                            )}
+                          </button>
+
                         </div>
 
                         <div className="relative">
@@ -582,7 +583,7 @@ export default function Settings() {
                           passwordData.newPassword !==
                           passwordData.confirmPassword
                         ) {
-                          alert(t("settings.security.passwords_mismatch"));
+                          toast.error("New passwords do not match!");
                           return;
                         }
                         setLoading(true);
@@ -593,7 +594,7 @@ export default function Settings() {
                             { security: settingsData.security },
                             { headers: { Authorization: `Bearer ${token}` } }
                           );
-                          alert(t("settings.security.updated"));
+                          toast.success("Security settings updated successfully!");
                           setPasswordData({
                             currentPassword: "",
                             newPassword: "",
@@ -601,7 +602,7 @@ export default function Settings() {
                           });
                         } catch (error) {
                           console.error("Error updating settings:", error);
-                          alert("Failed to update settings. Please try again.");
+                          toast.error("Failed to update settings. Please try again.");
                         } finally {
                           setLoading(false);
                         }
@@ -705,10 +706,10 @@ export default function Settings() {
                             { headers: { Authorization: `Bearer ${token}` } }
                           );
                           i18n.changeLanguage(settingsData.appearance.language);
-                          alert(t("settings.appearance.updated"));
+                          toast.success("Appearance settings updated successfully!");
                         } catch (error) {
                           console.error("Error updating settings:", error);
-                          alert("Failed to update settings. Please try again.");
+                          toast.error("Failed to update settings. Please try again.");
                         } finally {
                           setLoading(false);
                         }
@@ -788,10 +789,10 @@ export default function Settings() {
                             { headers: { Authorization: `Bearer ${token}` } }
                           );
                           i18n.changeLanguage(settingsData.appearance.language);
-                          alert(t("settings.language.updated"));
+                          toast.success("Language settings updated successfully!");
                         } catch (error) {
                           console.error("Error updating settings:", error);
-                          alert("Failed to update settings. Please try again.");
+                          toast.error("Failed to update settings. Please try again.");
                         } finally {
                           setLoading(false);
                         }

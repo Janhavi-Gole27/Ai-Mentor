@@ -13,10 +13,16 @@ const Sidebar = ({ activePage = "dashboard" }) => {
   const navigate = useNavigate();
   const [navigationItems, setNavigationItems] = useState([]);
   const [profilePopupOpen, setProfilePopupOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const profileRef = useRef(null);
 
   const handleLogout = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const confirmLogout = () => {
     logout();
+    setShowLogoutConfirm(false);
     setProfilePopupOpen(false);
     navigate("/login", { state: { logoutSuccess: true } });
   };
@@ -54,6 +60,20 @@ const Sidebar = ({ activePage = "dashboard" }) => {
   return (
     <>
       {sidebarOpen && <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[60] lg:hidden" onClick={() => setSidebarOpen(false)} />}
+
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-card border border-border/50 rounded-[2rem] shadow-2xl p-8 w-80 text-center">
+            <LogOut className="w-10 h-10 text-red-500 mx-auto mb-4" />
+            <h3 className="text-sm font-black uppercase tracking-tight text-main mb-2">Logout</h3>
+            <p className="text-xs text-muted mb-6">Are you sure you want to logout?</p>
+            <div className="flex gap-3">
+              <button onClick={() => setShowLogoutConfirm(false)} className="flex-1 py-3 rounded-[1.2rem] text-[10px] font-black uppercase tracking-widest border border-border hover:bg-canvas-alt transition-all">Cancel</button>
+              <button onClick={confirmLogout} className="flex-1 py-3 rounded-[1.2rem] text-[10px] font-black uppercase tracking-widest bg-red-500 text-white hover:bg-red-600 transition-all">Logout</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className={`fixed lg:fixed top-18.5 left-0 z-[70] bg-card/70 backdrop-blur-2xl border-r border-border/50 transform transition-all duration-500 ease-out lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"} ${sidebarCollapsed ? "lg:w-24" : "lg:w-80"} w-80 h-[calc(100vh-4rem)] overflow-visible`}>
         

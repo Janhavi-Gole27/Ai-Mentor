@@ -353,7 +353,7 @@ const Dashboard = () => {
                 return (
                 <div
                   key={index}
-                  className="bg-card rounded-2xl p-6 shadow-sm border border-border"
+                  className="bg-card rounded-2xl p-6 shadow-sm border border-border hover:shadow-lg hover:-translate-y-1 hover:border-teal-500/40 transition-all duration-300 cursor-pointer"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className={`p-3 rounded-xl ${card.iconBg}`}>
@@ -381,7 +381,7 @@ const Dashboard = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {coursesData.allCourses.slice(0, 3).map((course, index) => (
                     <Link to={`/learning/${course.id}`} key={index}>
-                      <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm h-full">
+                      <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm h-full hover:shadow-lg hover:-translate-y-1 hover:border-teal-500/40 transition-all duration-300">
                         <div className="relative">
                           <img
                             src={course.image}
@@ -571,7 +571,7 @@ const Dashboard = () => {
               </div>
 
               {/* Course Topics Chart */}
-              <div className="bg-card rounded-2xl p-6 shadow-sm border border-border">
+              <div className="bg-card rounded-2xl p-6 shadow-sm border border-border hover:shadow-lg hover:-translate-y-1 hover:border-teal-500/40 transition-all duration-300">
                 <h2 className="text-xl font-bold text-main mb-6">
                   {t("dashboard.course_topics")}
                 </h2>
@@ -642,7 +642,7 @@ const Dashboard = () => {
                 <h2 className="text-xl font-bold text-main mb-6">
                   {t("dashboard.my_courses")}
                 </h2>
-                <div className="bg-card rounded-xl border border-border overflow-hidden">
+                <div className="bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg hover:border-teal-500/40 transition-all duration-300">
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead className="bg-canvas-alt">
@@ -722,7 +722,7 @@ const Dashboard = () => {
                   {continueLearning.map((item, index) => (
                     <div
                       key={index}
-                      className="bg-card rounded-xl p-4 border border-border shadow-sm hover:shadow-md transition-shadow"
+                      className="bg-card rounded-xl p-4 border border-border shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-teal-500/40 transition-all duration-300"
                     >
                       <div className="flex items-center">
                         <Link
