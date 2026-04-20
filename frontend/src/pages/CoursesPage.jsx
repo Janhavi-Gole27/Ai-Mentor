@@ -240,8 +240,8 @@ const CoursesPage = () => {
             <div className="flex items-center justify-between gap-2.5 w-full md:w-auto">
 
               {/* Scrollable Tabs */}
-              <div className="flex justify-between items-center gap-2 sm:gap-3 flex-nowrap overflow-x-auto pb-1 sm:pb-0 scroll-smooth flex-1" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-                <style>{`div::-webkit-scrollbar { display: none; }`}</style>
+              <div className="courses-tabs-scroll-container flex justify-between items-center gap-2 sm:gap-3 flex-nowrap overflow-x-auto pb-1 sm:pb-0 scroll-smooth flex-1" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+                <style>{`.courses-tabs-scroll-container::-webkit-scrollbar { display: none; }`}</style>
                 <button
                   onClick={() => setActiveTab("my-courses")}
                   className={`flex-1 basis-0 min-w-0 flex items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-6 py-2.5 rounded-full font-semibold text-xs sm:text-sm transition-all ${activeTab === "my-courses"
