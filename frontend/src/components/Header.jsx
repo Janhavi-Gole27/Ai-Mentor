@@ -138,7 +138,7 @@ const Header = ({ searchQuery = "", onSearchChange }) => {
 
   return (
     <>
-    <header className="bg-card/80 backdrop-blur-xl border-b border-border/50 px-6 py-4 fixed top-0 left-0 right-0 z-[100]">
+    <header className="bg-card/80 backdrop-blur-xl border-b border-border/50 px-4 sm:px-6 py-3 sm:py-4 fixed top-0 left-0 right-0 z-[100]">
       <div className="flex items-center justify-between max-w-[1600px] mx-auto">
 
         {/* Mobile Menu & Logo */}
@@ -155,13 +155,13 @@ const Header = ({ searchQuery = "", onSearchChange }) => {
             <img
               src="/upto.png"
               alt="UptoSkills Logo"
-              className="h-10 w-auto"
+              className="h-8 sm:h-10 w-auto"
             />
           </div>
         </div>
 
         {/* Search Bar (Mobile par hidden) */}
-        <div className="flex-1 max-w-md mx-8 hidden md:block">
+        <div className="flex-1 max-w-md mx-2 sm:mx-4 hidden sm:block ">
           <div className="relative group">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted group-focus-within:text-teal-500 transition-colors w-4 h-4" />
             <input
@@ -176,19 +176,19 @@ const Header = ({ searchQuery = "", onSearchChange }) => {
                 }
                 setInternalSearchQuery(nextValue);
               }}
-              className="w-full pl-12 pr-4 py-2.5 bg-canvas border border-border rounded-2xl text-sm focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all outline-none"
+              className="w-full pl-12 pr-4 py-2 bg-canvas border border-border rounded-2xl text-xs sm:text-sm focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all outline-none"
             />
           </div>
         </div>
 
         {/* Action Buttons & Profile */}
-        <div className="flex items-center space-x-5">
+        <div className="flex items-center space-x-1.5 sm:space-x-3 lg:space-x-5">
           <ThemeToggle />
 
           <div className="relative" ref={notificationRef}>
             <div
               onClick={() => setNotifOpen(!notifOpen)}
-              className="relative cursor-pointer p-2.5 hover:bg-canvas-alt rounded-xl transition-all group"
+              className="relative cursor-pointer p-2 sm:p-2.5 hover:bg-canvas-alt rounded-xl transition-all group"
             >
               <Bell className="w-5 h-5 text-muted group-hover:rotate-12 transition-transform" />
               {unreadCount > 0 && (
@@ -200,7 +200,7 @@ const Header = ({ searchQuery = "", onSearchChange }) => {
 
             {/* Notification Dropdown - Responsive Positioning */}
             {notifOpen && (
-              <div className="fixed md:absolute right-4 left-4 md:right-0 md:left-auto mt-4 md:w-96 bg-card border border-border/50 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.2)] z-[110] overflow-hidden animate-in fade-in zoom-in slide-in-from-top-4 duration-300">
+              <div className="fixed md:absolute left-4 right-4 md:left-auto md:right-0 top-16 md:top-auto md:mt-4 md:w-96 bg-card border border-border/50 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.2)] z-[110] overflow-hidden animate-in fade-in zoom-in slide-in-from-top-4 duration-300">
                 <div className="p-6 bg-gradient-to-br from-teal-500/10 via-blue-500/5 to-transparent border-b border-border/50 flex items-center justify-between">
                   <div>
                     <h4 className="text-sm font-black text-main uppercase">Notifications</h4>
@@ -259,22 +259,22 @@ const Header = ({ searchQuery = "", onSearchChange }) => {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={toggleDropdown}
-              className="flex items-center space-x-3 p-1 pr-3 rounded-2xl hover:bg-canvas-alt transition-all border border-transparent hover:border-border group"
+              className="flex items-center space-x-2 sm:space-x-3 p-1 sm:pr-3 rounded-2xl hover:bg-canvas-alt transition-all border border-transparent hover:border-border group"
             >
               <div className="relative">
                 <img
                   src={`https://api.dicebear.com/8.x/initials/svg?seed=${encodeURIComponent(displayName)}`}
-                  className="w-9 h-9 rounded-xl shadow-md border border-border/50 group-hover:border-teal-500 transition-all"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl shadow-md border border-border/50 group-hover:border-teal-500 transition-all"
                   alt="Avatar"
                 />
                 <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-card rounded-full" />
               </div>
-              <span className="text-sm font-bold text-main hidden lg:block">{displayName}</span>
+              <span className="text-sm font-bold text-main hidden md:block lg:block">{displayName}</span>
             </button>
 
             {/* Impressive Floating Menu */}
             {dropdownOpen && (
-              <div className="absolute right-0 mt-4 w-72 bg-card/95 backdrop-blur-2xl border border-border/50 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.2)] z-[110] overflow-hidden animate-in fade-in zoom-in slide-in-from-top-4 duration-300">
+              <div className="absolute right-0 sm:right-0 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 mt-4 w-[90vw] sm:w-72 bg-card/95 backdrop-blur-2xl border border-border/50 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.2)] z-[110] overflow-hidden animate-in fade-in zoom-in slide-in-from-top-4 duration-300">
                 <div className="p-6 bg-gradient-to-br from-teal-500/10 via-blue-500/5 to-transparent border-b border-border/50">
                   <div className="flex items-center space-x-4 mb-4">
                     <img
@@ -314,7 +314,7 @@ const Header = ({ searchQuery = "", onSearchChange }) => {
     </header>
       {showLogoutConfirm && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-card border border-border/50 rounded-[2rem] shadow-2xl p-8 w-80 text-center">
+          <div className="bg-card border border-border/50 rounded-[2rem] shadow-2xl p-6 sm:p-8 w-[90%] max-w-sm text-center">
             <LogOut className="w-10 h-10 text-red-500 mx-auto mb-4" />
             <h3 className="text-sm font-black uppercase tracking-tight text-main mb-2">Logout</h3>
             <p className="text-xs text-muted mb-6">Are you sure you want to logout?</p>
