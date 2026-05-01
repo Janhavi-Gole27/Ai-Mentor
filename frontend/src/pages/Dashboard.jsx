@@ -435,13 +435,18 @@ const Dashboard = () => {
           </p>
 
           <div className="flex justify-between items-center mt-2">
-            <span className="font-bold text-green-500">₹0</span>
+            <span className="font-bold text-green-500">{course.price || "₹0"}</span>
 
             <button
-              onClick={() => navigate(`/course-preview/${course.id}`)}
+              onClick={() => {
+                const isEnrolled = user?.purchasedCourses?.some((p) => p.courseId == course.id);
+                navigate(isEnrolled ? `/learning/${course.id}` : `/course-preview/${course.id}`);
+              }}
               className="px-3 py-1.5 text-xs bg-teal-500 text-white rounded-lg hover:bg-teal-600"
             >
-              {t("dashboard.enroll")}
+              {user?.purchasedCourses?.some((p) => p.courseId == course.id)
+                ? (t("dashboard.continue_learning") !== "dashboard.continue_learning" ? t("dashboard.continue_learning") : "Continue Learning")
+                : t("dashboard.enroll")}
             </button>
           </div>
         </div>
